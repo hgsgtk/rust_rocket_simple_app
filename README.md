@@ -68,6 +68,12 @@ test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out
 
 error: test failed, to rerun pass '--bin rocket_api'
 ```
+
+# Requests
+## Dynamic_Segment
+How to mount multiple route is as follow...  
+https://github.com/SergioBenitez/Rocket/blob/v0.3.3/examples/hello_person/src/main.rs
+
 # Reference
 - https://rocket.rs/guide/getting-started/
 - https://rocket.rs/guide/testing/
