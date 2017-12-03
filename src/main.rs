@@ -3,19 +3,19 @@
 
 extern crate rocket;
 
-#[get("/")]
-fn hello() -> &'static str {
+#[get("/hello")]
+fn hello_world() -> &'static str {
     "Hello, world!"
 }
 
-#[get("/<name>")]
-fn greeting(name: String) -> String {
+#[get("/hello/<name>")]
+fn hello_name(name: String) -> String {
     format!("Hello, {}", name.as_str())
 }
 
 fn rocket() -> rocket::Rocket {
     rocket::ignite()
-        .mount("/", routes![hello, greeting])
+        .mount("/", routes![hello_world, hello_name])
 }
 
 fn main() {
@@ -32,16 +32,23 @@ mod test {
     #[test]
     fn hello_world() {
         let client = Client::new(rocket()).expect("valid rocket instance");
-        let mut response = client.get("/").dispatch();
+        let mut response = client.get("/hello").dispatch();
         assert_eq!(response.status(), Status::Ok);
         assert_eq!(response.body_string(), Some("Hello, world!".into()));
     }
 
     #[test]
-    fn greeting() {
+    fn hello_name() {
         let client = Client::new(rocket()).expect("valid rocket instance");
-        let mut response = client.get("/kazuki").dispatch();
+        let mut response = client.get("/hello/kazuki").dispatch();
         assert_eq!(response.status(), Status::Ok);
         assert_eq!(response.body_string(), Some("Hello, kazuki".into()));
+    }
+    #[test]
+    fn hello_name_number() {
+        let client = Client::new(rocket()).expect("valid rocket instance");
+        let mut response = client.get("/hello/1234").dispatch();
+        assert_eq!(response.status(), Status::Ok);
+        assert_eq!(response.body_string(), Some("Hello, 1234".into()));
     }
 }
