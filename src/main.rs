@@ -3,14 +3,12 @@
 
 extern crate rocket;
 
-use rocket::Rocket;
-
 #[get("/")]
 fn hello() -> &'static str {
     "Hello, world!"
 }
 
-fn rocket() -> Rocket {
+fn rocket() -> rocket::Rocket {
     rocket::ignite().mount("/", routes![hello])
 }
 
