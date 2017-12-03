@@ -8,8 +8,14 @@ fn hello() -> &'static str {
     "Hello, world!"
 }
 
+#[get("/<name>")]
+fn greeting(name: String) -> String {
+    format!("Hello, {}", name.as_str())
+}
+
 fn rocket() -> rocket::Rocket {
-    rocket::ignite().mount("/", routes![hello])
+    rocket::ignite()
+        .mount("/", routes![hello, greeting])
 }
 
 fn main() {
@@ -29,5 +35,13 @@ mod test {
         let mut response = client.get("/").dispatch();
         assert_eq!(response.status(), Status::Ok);
         assert_eq!(response.body_string(), Some("Hello, world!".into()));
+    }
+
+    #[test]
+    fn greeting() {
+        let client = Client::new(rocket()).expect("valid rocket instance");
+        let mut response = client.get("/kazuki").dispatch();
+        assert_eq!(response.status(), Status::Ok);
+        assert_eq!(response.body_string(), Some("Hello, kazuki".into()));
     }
 }
