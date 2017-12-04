@@ -2,6 +2,7 @@
 A Simple API in Rocket (Web framework in rust)
 
 # Hello World
+As I see the example code of rocket, I think we should write only routing at main.rs. 
 ## Trouble Shooting
 ```
 -> % cargo test
