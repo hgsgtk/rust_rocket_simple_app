@@ -1,5 +1,5 @@
 # First
-A Simple API in Rocket (Web framework in rust)
+A Simple Appliction in Rocket (Web framework in rust)
 
 # Hello World
 As I see the example code of rocket, I think we should write only routing at main.rs. 
@@ -74,6 +74,17 @@ error: test failed, to rerun pass '--bin rocket_api'
 ## Dynamic_Segment
 How to mount multiple route is as follow...  
 https://github.com/SergioBenitez/Rocket/blob/v0.3.3/examples/hello_person/src/main.rs
+
+# Template
+
+## How to assert Content-Type
+as follow... https://api.rocket.rs/rocket/struct.Response.html
+
+# Other
+## trouble shooting
+### #[feature] may not be used on the stable release channel
+Your rustc version may be mismatch. How to fix is above ...
+https://github.com/pingcap/tikv/issues/1671
 
 # Reference
 - https://rocket.rs/guide/getting-started/
